@@ -1,0 +1,126 @@
+body,
+h2
+{
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 3px;
+}
+
+header {
+    height: 15%;
+    background: linear-gradient(rgba(67, 136, 192, 0.651), rgb(255, 255, 255));
+}
+
+.logo_img
+{
+    height: 55%; 
+    width: 27%;
+    margin-top: 1%;
+    margin-left: 1%;
+    float: left;
+}
+
+.home_pg{
+    width: 430px;
+    margin-top: 0px;
+}
+
+.nav-link{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+main {
+    padding: 20px;
+    height: auto;
+     /* Center the container itself */
+}
+
+h2{
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+h5, h3{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+
+section{
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 20px 30px 20px; /* Adjust spacing between cards */
+    vertical-align: top; /* Ensure cards align properly */
+    background: linear-gradient();
+}
+
+p{
+    margin-bottom:5px;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.btn-primary, .btn-secondary{
+    background-color:rgb(89, 76, 119);
+    border:none;
+    font-weight: bold;
+    float:left;
+    margin-top:-25%;
+    font-size: 15px;
+}
+
+.btn-secondary{
+    margin-top:0;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    header {
+        height: auto;
+        text-align: center;
+    }
+ 
+    .logo_img {
+        height: auto;
+        width: 70%;
+        margin-top: 1%;
+        margin-left: 0;
+        float: none; 
+    }
+ 
+    .nav {
+        display: block;
+        margin-right: 7%;
+    }
+ 
+    .nav-item {
+        margin: 0 10px;
+        width: auto;
+        height: 50px;
+    }
+ 
+    .nav-link{
+        margin-right: -7%;
+    }
+    
+    h2,h3{
+        text-align: center;
+    }
+}
+

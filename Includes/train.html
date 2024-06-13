@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Page</title>
+    <link rel="stylesheet" href="../CSS/train.css">
+</head>
+<body>
+    <div class="top-rectangle">
+        <button class="purple-button" 
+                onmouseover="this.style.backgroundColor='#6a0dad'; this.style.color='white';" 
+                onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6a0dad';"
+                onclick="window.location.href='https://iskorinla2.mtacloud.co.il/Includes/trainings.html'">
+                צפייה באימונים קיימים
+        </button>
+        <div class="app-info">
+            <div class="app-title">Fit Yourself Everywhere</div>
+            <div class="app-icon">
+                <img src="../Images/סמל.png" alt="App Icon">
+            </div>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <div class="image-caption">יצירת אימון חדש</div>
+        <img src="../Images/a1.jpeg" alt="Training Image">
+    </div>
+
+    <div class="form-container">
+        <form id="trainingForm" onsubmit="return false;" action="../Includes/trainer.php" method="post">
+            <div class="form-row">
+                <label for="trainer-ID">תז מאמן</label>
+                <input type="text" id="trainer-ID" name="trainer-ID" placeholder="הזן תז" value="<?php echo htmlspecialchars($_SESSION['user']['id']); ?>" readonly>
+            </div>
+            <div class="form-row">
+                <label for="training-type">סוג האימון</label>
+                <input type="text" id="training-type" name="training-type" placeholder="הזן סוג אימון">
+            </div>
+            <div class="form-row">
+                <label for="location">מיקום</label>
+                <input type="text" id="location" name="location" placeholder="הזן מיקום האימון">
+            </div>
+            <div class="form-row">
+                <label for="training-date">תאריך האימון</label>
+                <input type="date" id="training-date" name="training-date">
+                <label for="training-time">שעת האימון</label>
+                <input type="time" id="training-time" name="training-time">
+            </div>
+            <div class="form-row">
+                <label for="training-price">מחיר האימון</label>
+                <input type="number" id="training-price" name="training-price" placeholder="הזן מחיר האימון">
+            </div>
+            <div class="form-row">
+                <label for="training-max">מקסימום משתתפים </label>
+                <input type="number" id="training-max" name="training-max" placeholder="הזן מספר מקסימלי">
+            </div>
+            <div class="form-row">
+                <label for="training-Description">תיאור האימון</label>
+                <input type="text" id="training-Description" name="training-Description" class="large-input" placeholder="הזן תיאור">
+            </div>
+            <div class="bottom-button-container">
+                <button class="purple-button" onclick="validateAndSubmit()" onmouseover="this.style.backgroundColor='#6a0dad'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6a0dad';">יצירת אימון חדש</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="../JS/train.js"></script>
+</body>
+</html>

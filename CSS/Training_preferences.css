@@ -1,0 +1,303 @@
+body,
+h2
+{
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 3px;
+}
+
+header {
+    height: 15%;
+    background: linear-gradient(rgba(67, 136, 192, 0.651), rgb(255, 255, 255));
+}
+
+.logo_img
+{
+    height: 55%; 
+    width: 27%;
+    margin-top: 1%;
+    margin-left: 1%;
+    float: left;
+}
+
+.home_pg{
+    width: 430px;
+}
+
+.nav-link, p, h2, label{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+p,h2{
+    text-align: center;
+}
+
+main{
+    height: 105%;
+    background: linear-gradient(rgb(255, 255, 255), rgba(67, 136, 192, 0.651));
+}
+
+form{
+    border-radius: 40px;
+    padding: 3%;
+    background-image: url("../Images/Training_preferences/pexels-marta-wave-6454073.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    filter: brightness(100%);
+    background-position: right;
+}
+
+.type_training, .location_training, .hour_training{
+    font-size: large;
+    text-align: right;
+    display: inline;
+    margin-right: 3%;
+}
+
+.price_training{
+    font-size: large;
+    text-align: right;
+    display: block;
+    margin-right: 2.5%;
+    margin-top: 3%;
+}
+
+.fitness::before {
+    content: "\1F3CB"; /* Unicode for Weights symbol */
+    margin-left: 8px; /* Add some space between the icon and the text */
+}
+
+.dropdown-menu{
+    text-align: right;
+    background: linear-gradient(rgb(172, 151, 190), rgb(255, 255, 255));
+    max-height: 200px; /* Adjust this value as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Custom scrollbar styling (optional) */
+.dropdown-menu::-webkit-scrollbar {
+    width: 10px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: rgb(89, 76, 119);
+    border-radius: 10px;
+}
+
+.dropdown-menu input#searchInput {
+    width: 90%;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.dropdown-toggle{
+    background-color:rgb(172, 151, 190) !important;
+    font-weight: bold;
+    margin-right: 6%;
+    border-radius: 45px;
+    border: none;
+}
+
+.dropdown-toggle:hover{
+    background-color: white !important;
+    color: rgb(89, 76, 119);
+}
+
+.location_training{
+    display: block;
+    margin-top: 3%;
+}
+
+.location::before {
+    content: "\1F4CD"; /* Unicode for Map Pin symbol */
+    margin-left: 15px; /* Add some space between the icon and the text */
+}
+
+.hour::before {
+    content: "\1F552"; /* Unicode for Clock Face symbol */
+    margin-left: 8px; /* Add some space between the icon and the text */
+    margin-right: -0.5%;
+}
+
+.label_start, .label_end{
+    margin-right: 2%;
+    font-size: small;
+    color: black;
+}
+
+#input_start{
+    margin-top: 2%;
+}
+
+small{
+    font-weight: bold;
+    color: rgb(207, 72, 72);
+}
+
+#max_price{
+    border-radius: 45px;
+    color:white; 
+    font-weight:bold;
+    margin-right: 2%;
+    background-color:rgb(172, 151, 190);
+    text-align: center;
+    margin-top: 3%;
+    border: none;
+}
+
+.price::before {
+    content: "\1F4B3"; /* Unicode for Credit Card symbol */
+    margin-left: 8px; /* Add some space between the icon and the text */
+}
+
+#slider-range{
+    width: 30%;
+    margin-right: 17%;
+}
+
+.submit{
+    margin-top: 3%;
+    margin-right: 45%;
+    background-color: rgb(172, 151, 190);
+    font-weight: bolder;
+    border-radius: 10px;
+    border: none;
+    color:white;
+    width: 10%;
+}
+
+.edit{
+    margin-top: 3%;
+    margin-right: 5%;
+    margin-bottom: 2%;
+}
+
+.edit::before {
+    content: "\1F4DD"; /* Unicode for Memo symbol */
+    margin-left: 8px; /* Add some space between the icon and the text */
+}
+
+#warningMessage{
+    color: rgb(207, 72, 72);
+    font-weight: bolder;
+    margin-top:2%;
+}
+
+@media (max-width: 1100px) {
+    small{
+        display: block;
+        margin-right: 5%;
+    }  
+
+    main{
+        height: auto;
+    }
+
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    header {
+        height: auto;
+        text-align: center;
+    }
+ 
+    .logo_img {
+        height: auto;
+        width: 70%;
+        margin-top: 1%;
+        margin-left: 0;
+        float: none; 
+    }
+ 
+    .nav {
+        display: block;
+        margin-right: 7%;
+    }
+ 
+    .nav-item {
+        margin: 0 10px;
+        width: auto;
+        height: 50px;
+    }
+ 
+    .nav-link{
+        margin-right: -7%;
+    }
+
+    form {
+        background-size: cover;
+    }
+}
+
+@media (max-width: 700px) {
+    .dropdown-toggle {
+        width: 100%;
+        margin-right: 0;
+        border-radius: 20px;
+        margin-bottom: 5%;
+    }
+
+    .dropdown-menu {
+        width: 100%;
+    }
+
+    .type_training, .location_training, .hour_training, .price_training {
+        display: block;
+    }
+
+    .label_start, .label_end {
+      text-align: center;
+       display: block;
+    }
+
+    #input_start, #input_end{
+     
+        width:100%;
+       
+    }
+    .price_training, .hour_training{
+        margin-top: 5%;
+    }
+    
+    #max_price{
+        width: 100%;
+        margin-right: 0;
+        border-radius: 20px;
+    }
+
+    #slider-range {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .submit, .edit {
+        width: 100%;
+        margin-right: 0;
+    }
+    
+    .submit{
+        margin-top:7%;
+    }
+
+    small{
+        text-align: center;
+    } 
+    
+    form{
+        
+        background-position: center;
+    }
+
+}

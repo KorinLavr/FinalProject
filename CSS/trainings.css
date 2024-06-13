@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+.training-container {
+    width: 90%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #370866;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #6a0dad;
+    color: white;
+    font-size: 16px;
+}
+
+td {
+    background-color: #fafafa;
+    vertical-align: middle;
+    color: #333;
+}
+
+tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+th, td {
+    width: auto;
+    white-space: nowrap;
+}
+
+td img {
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-button {
+    background-color: white;
+    color: #6a0dad;
+    border: 2px solid #6a0dad;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: #6a0dad;
+    color: white;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #ff1a1a;
+}
+
+
+@media (max-width: 768px) {
+    th, td {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}

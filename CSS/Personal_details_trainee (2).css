@@ -1,0 +1,145 @@
+body,
+h2
+{
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+header {
+    height: 15%;
+    background: linear-gradient(rgba(105, 218, 161, 0.651), rgb(255, 255, 255));
+}
+
+.logo_img
+{
+    height: 55%; 
+    width: 27%;
+    margin-top: 1%;
+    margin-left: 1%;
+    float: left;
+}
+
+.home_pg{
+    width: 430px;
+}
+
+.nav-link, h2{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+main{
+    height: 110%;
+    background: linear-gradient(rgb(255, 255, 255), rgba(105, 218, 161, 0.651));
+    padding: 2%;
+}
+
+form{
+    padding: 3%;
+    background-image: url(../Images/Personal_details_trainee/pexels-johndetochka-11496106.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    filter: brightness(90%);
+    background-position: left;
+    border-radius: 10px;
+}
+
+h2, input, select{
+    margin-bottom: 1%;
+}
+
+label{
+    color: rgb(247, 247, 247);
+    font-weight: bold;
+    font-size: large;
+}
+
+input, select{
+    color:white !important; 
+    font-weight:bold !important;
+    width: 20% !important;
+    background-color:rgb(172, 151, 190) !important;
+}
+
+input[disabled] {
+    background-color: #f0f0f0; /* Lighter grey background */
+    color: #555; /* Darker text color */
+}
+
+.select_gender option{
+     background-color:white !important;
+     color:rgb(172, 151, 190);
+     font-weight:bold 
+}
+
+.edit{
+   float: left;
+}
+
+.edit::before {
+    content: "\1F4DD"; /* Unicode for Memo symbol */
+    margin-left: 8px; /* Add some space between the icon and the text */
+}
+
+.btn-outline-light{
+    margin-top: 3%;
+    background-color: rgb(172, 151, 190);
+    font-weight: bold;
+    border-radius: 10px;
+    border-color: white;
+    color:white;
+    width: 10%;
+    display:none;
+}
+
+.btn-outline-light:hover{
+    background-color: white;
+    color: rgb(172, 151, 190);
+}
+
+#successMessage{
+    color: red;
+    font-weight: bold;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    header {
+        height: auto;
+        text-align: center;
+    }
+ 
+    .logo_img {
+        height: auto;
+        width: 70%;
+        margin-top: 1%;
+        margin-left: 0;
+        float: none; 
+    }
+ 
+    .nav {
+        display: block;
+        margin-right: 7%;
+    }
+ 
+    .nav-item {
+        margin: 0 10px;
+        width: auto;
+        height: 50px;
+    }
+ 
+    .nav-link{
+        margin-right: -7%;
+    }
+}

@@ -1,0 +1,164 @@
+body,
+h2
+{
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 2px;
+}
+
+header {
+    height: 15%;
+    background: linear-gradient(rgba(18, 0, 0, 0.651), rgb(255, 255, 255));
+}
+
+.logo_img
+{
+    height: 55%; 
+    width: 27%;
+    margin-top: 1%;
+    margin-left: 1%;
+    float: left;
+}
+
+.home_pg{
+    width: 430px;
+}
+
+.nav-link{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+main {
+    padding: 20px;
+    height: auto;
+    text-align: center; /* Center the container itself */
+    background-image: url(../Images/Training_registration/pexels-victorfreitas-685530.jpg);
+    background-size:cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    filter:contrast(80%);  
+}
+
+
+h2, .remark {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+.training-card {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 20px 30px 20px; /* Adjust spacing between cards */
+    vertical-align: top; /* Ensure cards align properly */
+    background: linear-gradient();
+}
+
+.training-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: rgb(89, 76, 119);
+    font-weight: bold;
+}
+
+.training-card p{
+    margin: 5px 0;
+    color:black;
+    font-weight: bold;
+}
+
+.btn-primary, .btn-secondary {
+    background-color:rgb(89, 76, 119);
+    border:none;
+    font-weight: bold;
+    display: block;
+    margin: 10px auto;
+    font-size: 17px;
+    width:40%;
+}
+
+.details_btn{
+    font-size: 12px;
+    padding: 5px 10px;
+}
+
+.modal-title{
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.modal-content{
+    background: linear-gradient(rgba(201, 145, 223, 0.651),rgb(219, 148, 204), rgb(252, 233, 248));
+}
+
+.modal-body p{
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+@keyframes wave {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Apply the animation to the wave-animation class */
+.wave-animation {
+    color: red; /* Change color to green */
+    animation: wave 1.5s infinite; /* Apply the wave animation infinitely */
+}
+
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    header {
+        height: auto;
+        text-align: center;
+    }
+ 
+    .logo_img {
+        height: auto;
+        width: 70%;
+        margin-top: 1%;
+        margin-left: 0;
+        float: none; 
+    }
+ 
+    .nav {
+        display: block;
+        margin-right: 7%;
+    }
+ 
+    .nav-item {
+        margin: 0 10px;
+        width: auto;
+        height: 50px;
+    }
+ 
+    .nav-link{
+        margin-right: -7%;
+    }
+}

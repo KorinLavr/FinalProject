@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>הרשמה לאימון | Fit Yourself Everywhere</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/Training_registration.css"> 
+</head>
+<body dir="rtl">
+    <header>
+        <img class = "logo_img" src="../Images/לוגו.png" alt="לוגו">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="Logout.php">התנתקות</a>
+            </li>
+            <li class="nav-item home_pg">
+                <a class="nav-link" href="Trainee_profile.php">הפרופיל שלי</a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>אימונים מומלצים עבורך</h2>
+        <p class="remark">במידה ולא נמצאו אימונים התואמים את העדפותיך המערכת תציג אימונים אחרים היכולים להתאים לך</p>
+            <?php foreach ($trainings_to_show as $training): ?>
+                <?php
+                    $key_of_training_to_show = $training['Type'] . '|' . $training['Train_date'] . '|' . $training['Time'] . '|' . $training['Trainer_ID'];
+                    
+                    // Calculate the number of available places for this training session
+                    $available_places = $training['Max_training'] - $training['Num_curr_participants'];
+                ?>
+                <section class='training-card'>
+                    <h3><?php echo htmlspecialchars($training['Type']); ?></h3>
+                    <p>מיקום: <?php echo htmlspecialchars($training['Place']); ?></p>
+                    <p>תאריך: <?php echo htmlspecialchars($training['Train_date']); ?></p>
+                    <p>שעה: <?php echo htmlspecialchars($training['Time']); ?></p>
+                    <p>מחיר: <?php echo htmlspecialchars($training['Cost']); ?> ש"ח</p>
+                    <a href="Training_payment.php?key=<?php echo urlencode( $key_of_training_to_show); ?>" role="button" class="btn btn-primary">להרשמה</a>
+                    <button class="btn btn-primary details_btn" onclick="showDetails(<?php echo htmlspecialchars(json_encode($training)); ?>)">פרטים נוספים</button>
+                    
+                    <!-- Display message if there are 5 or fewer available places -->
+                    <?php if ($available_places <= 5): ?>
+                        <p class="wave-animation">רק <?php echo $available_places; ?> מקומות זמינים! הרשמו מהר!</p>
+                    <?php endif; ?>
+                </section>
+            <?php endforeach; ?>
+    </main>
+    
+    <!-- Modal Structure -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">פרטים נוספים</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMaxParticipants"></p>
+                    <p id="modalDescription"></p>
+                    <p id="modalTrainerName"></p>
+                    <p id="modalExperienceYears"></p>
+                    <p id="modalTrainingTypeOfTrainer"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">סגירה</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        function showDetails(training) {
+            document.getElementById('modalMaxParticipants').textContent = 'מספר משתתפים מרבי: ' + training.Max_training;
+            document.getElementById('modalDescription').textContent = 'תיאור: ' + training.Descript;
+            document.getElementById('modalTrainerName').textContent = 'שם המאמן: ' + training.F_name + ' ' + training.L_name;
+            document.getElementById('modalExperienceYears').textContent = 'שנות ניסיון: ' + training.Exp_years;
+            document.getElementById('modalTrainingTypeOfTrainer').textContent = 'סוגי אימונים שמוסמך להעביר: ' + training.Type_trainer;
+            
+            var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+            modal.show();
+        }
+    </script>
+</body>
+</html>

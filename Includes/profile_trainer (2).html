@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer's Portal</title>
+    <link rel="stylesheet" href="../CSS/profile_trainer.css"> 
+</head>
+<body>
+    <div class="top-rectangle">
+        <form action="Logout.php" method="post">
+            <button type="submit" class="logout-button">התנתקות</button>
+        </form>
+        <p class="profile-text">פרופיל מאמן</p>
+        <div class="app-info">
+            <h1 class="app-title">Fit Yourself Everywhere</h1>
+            <img src="../Images/סמל.png" alt="App Icon" class="app-icon">
+        </div>
+    </div>
+
+    <main>
+        <div class="background-image">
+            <div class="user-info">
+                <h2>שלום <?php echo htmlspecialchars($user['firstName'] . ' ' . $user['lastName']); ?>!</h2>
+                <h3>מס' ת"ז <?php echo htmlspecialchars($user['id']); ?></h3>
+            </div>
+            <div class="centered-buttons">
+                <button class="custom-button personal-details" onclick="window.location.href='personal_details.php'">פרטים אישיים</button>
+                <button class="custom-button exercises" onclick="window.location.href='trainings.html'">אימונים שיצרתי</button>
+                <button class="custom-button create-exercise" onclick="window.location.href='train.html?trainerID=<?php echo htmlspecialchars($user['id']); ?>'">יצירת אימון חדש</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

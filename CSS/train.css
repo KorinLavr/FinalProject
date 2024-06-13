@@ -1,0 +1,122 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+.top-rectangle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure the top rectangle stays above other content */
+}
+
+.app-info {
+    display: flex;
+    align-items: center;
+}
+
+.app-icon img {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px; /* Change to left margin for RTL */
+}
+
+.app-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #370866;
+}
+
+.purple-button {
+    border: 2px solid #6a0dad;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #6a0dad;
+    font-size: 16px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-right: 30px;
+}
+
+.image-container {
+    margin-top: 150px; /* Adjust margin based on height of top-rectangle */
+    text-align: center;
+}
+
+.image-caption {
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    margin-bottom: -100px; /* Pull caption above the image */
+    position: relative;
+    z-index: 1; /* Ensure caption stays above the image */
+}
+
+.image-container img {
+    width: 100%;
+    height: 150px; /* Reduced height */
+    object-fit: cover;
+    filter: brightness(0.5); /* Lower brightness */
+}
+.form-container {
+    padding: 30px;
+    direction: rtl; 
+    text-align: right; 
+}
+
+.form-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #370866;
+    margin-left: 10px; /* Change to left margin for RTL */
+    white-space: nowrap;
+    width: 150px; /* Fixed width for labels */
+    text-align: right; /* Align text to the right */
+}
+
+input {
+    padding: 10px;
+    border: 2px solid #6a0dad;
+    border-radius: 20px;
+    font-size: 16px;
+    width: 200px; /* Fixed width to align inputs */
+    margin-left: 10px; /* Space between inputs for RTL */
+}
+
+input.large-input {
+    width: 300px; /* Make the description input larger */
+    height: 50px; /* Adjust height if needed */
+}
+
+.purple-button:hover {
+    background-color: #6a0dad;
+    color: white;
+}
+
+.bottom-button-container {
+    display: flex;
+    justify-content: center; 
+    margin-top: 40px; 
+}
+
+input.error {
+    border-color: red;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אימונים שלי</title>
+    <link rel="stylesheet" href="../CSS/trainings.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('fetch_trainings.php')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Fetched data:', data);
+                    const tableBody = document.getElementById('trainingsTableBody');
+                    data.forEach(training => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${training.Trainer_ID}</td>
+                            <td>${training.Type}</td>
+                            <td>${training.Place}</td>
+                            <td>${training.Train_date}</td>
+                            <td>${training.Time}</td>
+                            <td>${training.Cost}</td>
+                            <td>${training.Max_training}</td>
+                            <td>${training.Descript}</td>
+                            <td><button class="delete-button" data-type="${training.Type}" data-time="${training.Time}" data-train_date="${training.Train_date}">מחק אימון</button></td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+
+                    document.querySelectorAll('.delete-button').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const type = this.getAttribute('data-type');
+                            const time = this.getAttribute('data-time');
+                            const train_date = this.getAttribute('data-train_date');
+                            deleteTraining(type, time, train_date, this);
+                        });
+                    });
+                })
+                .catch(error => console.error('Error fetching training data:', error));
+        });
+
+        function deleteTraining(type, time, train_date, buttonElement) {
+            fetch('delete_training.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ type, time, train_date })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Remove the training row from the table
+                    const row = buttonElement.closest('tr');
+                    row.remove();
+                } else {
+                    console.error('Error deleting training:', data.error);
+                    alert('Failed to delete training: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the training');
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="training-container">
+        <h1>אימונים שלי</h1>
+        <table id="trainingsTable">
+            <thead>
+                <tr>
+                    <th>תז מאמן</th>
+                    <th>סוג האימון</th>
+                    <th>מיקום</th>
+                    <th>תאריך האימון</th>
+                    <th>שעת האימון</th>
+                    <th>מחיר האימון</th>
+                    <th>מקסימום משתתפים</th>
+                    <th>תיאור האימון</th>
+                    <th>מחק אימון</th>
+                </tr>
+            </thead>
+            <tbody id="trainingsTableBody">
+                <!-- Training data will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button class="profile-button" onclick="window.location.href='profile_trainer.php'">
+                חזרה לפרופיל מאמן
+            </button>
+        </div>
+    </div>
+</body>
+</html>

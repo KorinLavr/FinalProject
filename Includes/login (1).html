@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> התחברות | Fit Yourself Everywhere</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-ZVFjLlqVM4c4zjsj8zl6rJb51p7zhbed++Bg3tnL3xYr+Qj6QdhzvL4CZrNbiHFA" crossorigin="anonymous">
+
+    <script>
+        // Function to display an error message if the error parameter exists
+        function checkForError() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('error')) {
+                document.getElementById('error-message').innerHTML = 'ניסיון ההתחברות נכשל. ודא שכתובת הדוא"ל והסיסמה נכונים.';
+            }
+        }
+        window.onload = checkForError;
+        
+         // Function to toggle password visibility
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '👁️'; // Unicode character for an open eye
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '🔒'; // Unicode character for a locked padlock
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">התחברות</h2>
+        <div id="error-message"></div>
+        <form action="login.php" method="post">
+            <label for="email">כתובת דוא"ל</label>
+            <input type="email" id="email" name="email" class="input-field" required>
+            
+            <label for="password">סיסמה</label>
+            <div class="password-input">
+                <input type="password" id="password" name="password" class="input-field" required>
+                <!-- Button to toggle password visibility -->
+                <span class="toggle-password" onclick="togglePasswordVisibility()" title="הצג/הסתר סיסמה">
+                    <span id="toggleIcon">🔒</span>
+                </span>
+            </div>
+            
+            <button type="submit" class="custom-button">התחברות</button>
+        </form>
+    </div>
+</body>
+</html>
