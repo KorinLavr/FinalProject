@@ -32,6 +32,10 @@ header {
     width: 430px;
 }
 
+.nav{
+    display:block;
+}
+
 .nav-link{
     font-weight: bold;
     color: rgb(89, 76, 119);
@@ -39,6 +43,7 @@ header {
 
 main {
     padding: 20px;
+    min-height: 85vh;
     height: auto;
     text-align: center; /* Center the container itself */
     background-image: url(../Images/Training_registration/pexels-victorfreitas-685530.jpg);
@@ -49,12 +54,24 @@ main {
     filter:contrast(80%);  
 }
 
+.main-message {
+   
+}
 
-h2, .remark {
+h2, .remark, .message {
     text-align: center;
     margin-bottom: 25px;
     font-weight: bold;
     color: white;
+}
+
+.message{
+    display: none;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .training-card {
@@ -67,7 +84,8 @@ h2, .remark {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     margin: 0 20px 30px 20px; /* Adjust spacing between cards */
     vertical-align: top; /* Ensure cards align properly */
-    background: linear-gradient();
+    background: linear-gradient(rgb(252, 233, 248), rgba(201, 145, 223, 0.651),rgb(219, 148, 204));
+    opacity: 0; /* Initially hide all cards */
 }
 
 .training-card h3 {
@@ -116,49 +134,75 @@ h2, .remark {
 @keyframes wave {
     0% {
         transform: translateY(0);
+        color: rgb(89, 76, 119);
+    }
+    25% {
+        transform: translateY(-10px);
+        color: white
     }
     50% {
-        transform: translateY(-5px);
+        transform: translateY(0px);
+        color: rgb(89, 76, 119);
+    }
+    75% {
+        transform: translateY(10px);
+        color: white;
     }
     100% {
         transform: translateY(0);
+        color: rgb(89, 76, 119);
     }
 }
 
 /* Apply the animation to the wave-animation class */
 .wave-animation {
-    color: red; /* Change color to green */
-    animation: wave 1.5s infinite; /* Apply the wave animation infinitely */
+    animation: wave 1.5s ease-in-out infinite; /* Apply the wave animation infinitely */
 }
 
 
 /* Responsive Design */
 @media (max-width: 900px) {
-    header {
-        height: auto;
-        text-align: center;
-    }
- 
+    
     .logo_img {
-        height: auto;
-        width: 70%;
+       height: auto;
+        width: 60%;
         margin-top: 1%;
         margin-left: 0;
-        float: none; 
     }
  
-    .nav {
-        display: block;
-        margin-right: 7%;
-    }
- 
-    .nav-item {
-        margin: 0 10px;
-        width: auto;
+     .nav-item {
         height: 50px;
+        display: inline;
     }
- 
+
     .nav-link{
-        margin-right: -7%;
+        display: inline; 
     }
+}
+
+
+@media (max-width: 500px) {
+    
+    header {
+       height:auto;
+    }
+    
+    .logo_img {
+        width: 100%;
+        height:80%;
+    }
+    
+    .nav {
+        margin-bottom: 5%;
+        margin-right: 18%;
+    }
+
+    .nav-item {
+        height: 30px;
+    }
+
+    .nav-link {
+        font-size: 1em;
+    }
+
 }

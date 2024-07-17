@@ -1,7 +1,7 @@
 <?php
-session_start(); // Ensure the session is started
+session_start(); 
 
-// Check if user is logged in and is a trainer
+
 if (!isset($_SESSION['user']) || $_SESSION['userType'] !== 'trainer') {
     echo json_encode(['error' => 'Unauthorized']);
     exit();
@@ -29,7 +29,7 @@ if (!$stmt) {
     echo json_encode(['error' => 'Prepare statement failed: ' . $conn->error]);
     exit();
 }
-$stmt->bind_param("sss", $type, $time, $train_date); // "sss" for three strings
+$stmt->bind_param("sss", $type, $time, $train_date); 
 $stmt->execute();
 
 if ($stmt->affected_rows > 0) {

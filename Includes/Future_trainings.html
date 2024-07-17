@@ -12,30 +12,31 @@
         <header>
             <img class = "logo_img" src="../Images/לוגו.png" alt="לוגו">
             <ul class="nav">
+                 <li class="nav-item home_pg">
+                  <a class="nav-link" href="Trainee_profile.php">הפרופיל שלי</a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="Logout.php">התנתקות</a>
-                </li>
-                <li class="nav-item home_pg">
-                  <a class="nav-link" href="Trainee_profile.php">הפרופיל שלי</a>
                 </li>
             </ul>
         </header>
 
         <main>
-           <h2>אימונים קרובים</h2>
-                <?php if (empty($futureTrainings)): ?>
-                    <h3>לא קיימים אימונים קרובים</h3>
-                <?php else: ?>
+              <h2>אימונים קרובים</h2>
+              <?php if (empty($futureTrainings)): ?>
+                        <h3>לא קיימים אימונים קרובים</h3>
+                    <?php else: ?>
                         <?php foreach ($futureTrainings as $training): ?>
                             <section>
                                     <p><span class="bold">סוג אימון:</span> <?php echo htmlspecialchars($training['Training_type']); ?></p>
+                                    <p><span class="bold">מיקום:</span> <?php echo htmlspecialchars($training['Place']); ?></p>
                                     <p><span class="bold">תאריך:</span><?php echo htmlspecialchars($training['Training_date']); ?></p>
                                     <p><span class="bold">שעה:</span> <?php echo htmlspecialchars($training['Training_time']); ?></p>
                                     <!-- Add more details as necessary -->
-                                    <button class="btn btn-primary details_btn" onclick="showDetails(<?php echo htmlspecialchars(json_encode($training)); ?>)">פרטים נוספים</button>
-                             </section>
+                                    <button class="btn btn-primary" onclick="showDetails(<?php echo htmlspecialchars(json_encode($training)); ?>)">פרטים נוספים</button>
+                            </section>
                         <?php endforeach; ?>
-                <?php endif; ?>
+              <?php endif; ?>
         </main>
         
             <!-- Modal Structure -->
@@ -54,7 +55,7 @@
                         <p id="modalTrainingTypeOfTrainer"></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">סגירה</button>
+                        <button type="button" class="btn btn-secondary close_btn" data-bs-dismiss="modal">סגירה</button>
                     </div>
                 </div>
             </div>
@@ -74,6 +75,25 @@
                 var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
                 modal.show();
             }
+            
+            
+            // Function to sequentially show each training section
+            function showTrainingSectionSequentially() {
+                const trainingSection = document.querySelectorAll('section');
+                let delay = 0;
+        
+                trainingSection.forEach((section, index) => {
+                    setTimeout(() => {
+                        section.style.opacity = '1';
+                        section.style.animation = 'fadeIn 0.5s ease-out';
+                    }, delay);
+                    delay += 200; // Adjust the delay between each card (in milliseconds)
+                });
+            }
+        
+            // Call the function when the page is loaded
+            document.addEventListener('DOMContentLoaded', showTrainingSectionSequentially);
+        
         </script>
         
         

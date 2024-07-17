@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Training Page</title>
     <link rel="stylesheet" href="../CSS/train.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACOUDai8CO8dPnmFLo1pLtAwbzuYTxzbM&libraries=places&callback=initAutocomplete" async defer></script> 
+    <script>
+        function initAutocomplete() {
+            const input_location = document.getElementById('location');
+            const autocomplete = new google.maps.places.Autocomplete(input_location, {
+                componentRestrictions: { country: 'il' }
+            });
+        
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                 if (!place.geometry || !place.name) {
+                    alert("לא נמצאו פרטים זמינים עבור המקום שהוזן. אנא בדוק/י את הקלט ונסה/י שנית.");
+                    return;
+                }
+        
+                const lat = place.geometry.location.lat();
+                const lng = place.geometry.location.lng();
+                document.getElementById('latitude').value = lat;
+                document.getElementById('longitude').value = lng;
+                
+                console.log("Formatted Address:", place.formatted_address);
+            });
+        }
+        
+        // Ensure initAutocomplete is called when the Google Places API script loads
+        window.onload = function() {
+            if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
+                initAutocomplete();
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="top-rectangle">
@@ -28,18 +59,39 @@
     </div>
 
     <div class="form-container">
-        <form id="trainingForm" onsubmit="return false;" action="../Includes/trainer.php" method="post">
+        <form id="trainingForm" onsubmit="return false;" action="trainer.php" method="post">
             <div class="form-row">
                 <label for="trainer-ID">תז מאמן</label>
-                <input type="text" id="trainer-ID" name="trainer-ID" placeholder="הזן תז" value="<?php echo htmlspecialchars($_SESSION['user']['id']); ?>" readonly>
+                <input type="text" id="trainer-ID" name="trainer-ID" value="<?php echo htmlspecialchars($_SESSION['user']['id']); ?>" readonly>
             </div>
             <div class="form-row">
                 <label for="training-type">סוג האימון</label>
-                <input type="text" id="training-type" name="training-type" placeholder="הזן סוג אימון">
+                <select id="training-type" name="training-type">
+                    <option value="">בחר סוג אימון</option>
+                    <option value="אירובי מדרגה">אירובי מדרגה</option>
+                    <option value="בטן, ישבן, ירכים">בטן, ישבן, ירכים</option>
+                    <option value="גמישות ומתיחות">גמישות ומתיחות</option>
+                    <option value="זומבה">זומבה</option>
+                    <option value="יוגה">יוגה</option>
+                    <option value="יוגלאטיס">יוגלאטיס</option>
+                    <option value="עיצוב">עיצוב</option>
+                    <option value="פונקציונאלי">פונקציונאלי</option>
+                    <option value="פילאטיס">פילאטיס</option>
+                    <option value="קיקבוקס">קיקבוקס</option>
+                    <option value="BODY PUMP">BODY PUMP</option>
+                    <option value="BOOTCAMP מתקדמים">BOOTCAMP מתקדמים</option>
+                    <option value="CORE מתיחות">CORE מתיחות</option>
+                    <option value="HIT">HIT</option>
+                    <option value="PUMP מדרגה">PUMP מדרגה</option>
+                    <option value="TRX">TRX</option>
+                </select>
             </div>
+
             <div class="form-row">
                 <label for="location">מיקום</label>
                 <input type="text" id="location" name="location" placeholder="הזן מיקום האימון">
+                 <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
             </div>
             <div class="form-row">
                 <label for="training-date">תאריך האימון</label>

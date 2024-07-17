@@ -2,59 +2,73 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get userType from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const userType = urlParams.get('userType');
-  
+
     // Show relevant fields and title based on userType
-    var trainerFields = document.getElementById('trainerFields');
-  //  var traineeFields = document.getElementById('traineeFields');
-    var typeUserRegister = document.getElementById('type_user_register');
-    var userTypeInput = document.getElementById('userType');
+    const trainerFields = document.getElementById('trainerFields');
+    const typeUserRegister = document.getElementById('type_user_register');
+    const userTypeInput = document.getElementById('userType');
     
     userTypeInput.value = userType;
 
     if (userType === 'trainer') {
-        typeUserRegister.innerHTML = "יצירת פרופיל מאמן";
+        typeUserRegister.textContent = "יצירת פרופיל מאמן";
         trainerFields.style.display = 'block';
-      //  traineeFields.style.display = 'none';
-      //  document.getElementById('trainer_id').style.display = 'block';
     } else if (userType === 'trainee') {
-        typeUserRegister.innerHTML = "יצירת פרופיל מתאמן";
+        typeUserRegister.textContent = "יצירת פרופיל מתאמן";
         trainerFields.style.display = 'none';
-        document.getElementById('trainer_id').style.display = 'none';
-     //   traineeFields.style.display = 'block';
+        const trainerIdField = document.getElementById('trainer_id');
+        if (trainerIdField) {
+            trainerIdField.style.display = 'none';
+        }
     }
 });
 
-
 document.getElementById("Registration_Form").addEventListener("submit", function(event) {
-    
     event.preventDefault(); // Prevent the default form submission behavior
-
+    
     if (validateForm()) {
-        const formData = new FormData(document.getElementById("Registration_Form"));
+        const formData = new FormData(this);
         const xhr = new XMLHttpRequest();
-    
+        
         xhr.open("POST", "Registration.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    
         xhr.onreadystatechange = function() {
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                const response = JSON.parse(this.responseText);
-                if (response.error) {
-                    alert(response.error);
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            alert(response.message);
+                            document.getElementById("Registration_Form").reset(); // Clear the form fields on success
+                            window.location.href = 'index.html'; // Redirect to home page
+                        }
+                    } catch (e) {
+                        console.error("Error parsing response:", e);
+                        alert("An error occurred. Please try again.");
+                    }
                 } else {
-                    alert(response.message);
-                     document.getElementById("Registration_Form").reset(); // Clear the form fields on success
-                     window.location.href = 'index.html'; // Redirect to home page
+                    alert("An error occurred. Please try again.");
                 }
             }
         };
-    
-        xhr.send(new URLSearchParams(formData).toString());
+        
+        xhr.send(formData);
     }
 });
 
+function calculateAge(dob) {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 function validateForm() {
-    
     let isValid = true;
     const userType = document.getElementById('userType').value;
     let fields;
@@ -69,7 +83,7 @@ function validateForm() {
             { id: "phone", errorMessage: "יש למלא מספר טלפון" },
             { id: "email", errorMessage: "יש למלא כתובת דוא\"ל" },
             { id: "experience", errorMessage: "יש למלא שנות ניסיון" },
-            { id: "training-types", errorMessage: "יש למלא סוגי אימונים" },
+            { id: "training-type", errorMessage: "יש למלא סוגי אימונים" },
             { id: "password", errorMessage: "סיסמה לא חוקית. הסיסמה חייבת להכיל לפחות 8 תווים, כולל אותיות ומספרים.", customValidation: value => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value) },
             { id: "confirm-password", errorMessage: "יש לאמת סיסמה" }
         ];
@@ -85,32 +99,60 @@ function validateForm() {
             { id: "confirm-password", errorMessage: "יש לאמת סיסמה" }
         ];
     }
-    
+
     fields.forEach(field => {
         const input = document.getElementById(field.id);
         const errorSpan = document.getElementById(`${field.id}-error`);
-        const value = input.value.trim();
-        console.log(`${field.id}: ${value}`); 
+        const value = input ? input.value.trim() : '';
 
-        if (!value || (field.customValidation && !field.customValidation(value))) {
-            input.classList.add("error");
-            errorSpan.textContent = field.customValidation && !field.customValidation(value) ? field.errorMessage : field.errorMessage;
+        if (!input || !value || (field.customValidation && !field.customValidation(value))) {
+            if (errorSpan) {
+                errorSpan.textContent = field.errorMessage;
+            }
             isValid = false;
         } else {
-            input.classList.remove("error");
-            errorSpan.textContent = "";
+            if (errorSpan) {
+                errorSpan.textContent = "";
+            }
         }
     });
 
+    // Age validation for trainers and trainees
+    const dob = document.getElementById("dob").value;
+    const age = calculateAge(dob);
+    const dobError = document.getElementById("dob-error");
+
+    if (userType === 'trainer' && age < 18) {
+        if (dobError) {
+            dobError.textContent = "לא ניתן להירשם כמאמן במערכת. מאמן יכול להיות רק בגיל 18 ומעלה.";
+        }
+        isValid = false;
+    } else if (userType === 'trainee' && age < 18) {
+        if (dobError) {
+            dobError.textContent = "לא ניתן להירשם כמתאמן במערכת. מתאמן יכול להיות רק בגיל 18 ומעלה.";
+        }
+        isValid = false;
+    } else {
+        if (dobError) {
+            dobError.textContent = "";
+        }
+    }
+
+    // Password confirmation validation
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
+    const confirmPasswordError = document.getElementById("confirm-password-error");
 
     if (password !== confirmPassword) {
-        document.getElementById("confirm-password-error").textContent = "אימות סיסמה נכשל. הסיסמאות אינן תואמות.";
-        document.getElementById("confirm-password").classList.add("error");
+        if (confirmPasswordError) {
+            confirmPasswordError.textContent = "אימות סיסמה נכשל. הסיסמאות אינן תואמות.";
+        }
         isValid = false;
+    } else {
+        if (confirmPasswordError) {
+            confirmPasswordError.textContent = "";
+        }
     }
 
     return isValid;
 }
-

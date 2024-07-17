@@ -1,7 +1,7 @@
 <?php
 
     header('Content-Type: application/json; charset=UTF-8');
-    
+
     
     $host = 'localhost';  
     $user = 'iskorinla2_NKM';
@@ -19,17 +19,17 @@
     
     if ($userType === 'trainer') {
         // Insert into Trainer table
-        $trainerID = $_POST['trainer-ID'];
-        $firstName = $_POST['first-name'];
-        $lastName = $_POST['last-name'];
-        $gender = $_POST['gender'];
-        $dob = $_POST['dob'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $experience = $_POST['experience'];
-        $trainingTypes = $_POST['training-types'];
-        $certification = isset($_POST['certification']) && $_POST['certification'] === 'yes' ? 1 : 0;
-        $password = $_POST['password'];
+        $trainerID = $_POST['Trainer_ID'];
+        $firstName = $_POST['F_name'];
+        $lastName = $_POST['L_name'];
+        $gender = $_POST['Sex'];
+        $dob = $_POST['Bdate'];
+        $phone = $_POST['Phone_num'];
+        $email = $_POST['Email'];
+        $experience = $_POST['Exp_years'];
+        $trainingTypes = $_POST['Type'];
+        $certification = isset($_POST['Certification']) && $_POST['Certification'] === 'yes' ? 1 : 0;
+        $password = $_POST['Password'];
     
         $sql = "INSERT INTO Trainer(Trainer_ID, F_name, L_name, Sex, Bdate, Phone_num, Email, Exp_years, Type, Certification, Password) 
                 VALUES ('$trainerID','$firstName', '$lastName', '$gender', '$dob', '$phone', '$email', '$experience', '$trainingTypes', '$certification', '$password')";
@@ -43,13 +43,13 @@
         
     } elseif ($userType === 'trainee') {
       
-        $firstName = $_POST['first-name'];
-        $lastName = $_POST['last-name'];
-        $gender = $_POST['gender'];
-        $dob = $_POST['dob'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $firstName = $_POST['F_name'];
+        $lastName = $_POST['L_name'];
+        $gender = $_POST['Sex'];
+        $dob = $_POST['Bdate'];
+        $phone = $_POST['Phone_num'];
+        $email = $_POST['Email'];
+        $password = $_POST['Password'];
     
         $sql = "INSERT INTO Trainee(First_name, Last_name, Gender, Birth_date, Phone_num, Email, Password) 
                 VALUES ('$firstName', '$lastName', '$gender', '$dob', '$phone', '$email', '$password')";

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>תשלום עבור אימון | Fit Yourself Everywhere</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/Training_payment.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/card/2.5.4/card.min.css">
+
+</head>
+<body dir="rtl">
+    <header>
+        <img class = "logo_img" src="../Images/לוגו.png" alt="לוגו">
+        <ul class="nav">
+            <li class="nav-item home_pg">
+                <a class="nav-link" href="Trainee_profile.php">הפרופיל שלי</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Logout.php">התנתקות</a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2 id="payment_success_title">אישור תשלום עבור אימון</h2>
+        <p id="payment_success_message"></p>
+        <a id="trainee_profile_link" href="Trainee_profile.php" style="display: none;">חזור לפרופיל שלי</a>
+        <h2 id="payment_title">תשלום עבור אימון</h2>
+        <section id="training_details">
+            <p><span class="bold">סוג אימון:</span><?php echo htmlspecialchars($training['Type']); ?></p>
+            <p><span class="bold">מיקום:</span><?php echo htmlspecialchars($training['Place']); ?></p>
+            <p><span class="bold">תאריך:</span><?php echo htmlspecialchars($training['Train_date']); ?></p>
+            <p><span class="bold">שעה:</span><?php echo htmlspecialchars($training['Time']); ?></p>
+            <p><span class="bold">מחיר:</span><?php echo htmlspecialchars($training['Cost']); ?> ש"ח</p>
+        </section>
+        
+        <form action="Process_payment.php" method="post" id="payment_form" name="payment_form" onsubmit="return validateForm()">
+            
+             <input type="hidden" name="training_type" value="<?php echo htmlspecialchars($training['Type']); ?>">
+            <input type="hidden" name="training_date" value="<?php echo htmlspecialchars($training['Train_date']); ?>">
+            <input type="hidden" name="training_time" value="<?php echo htmlspecialchars($training['Time']); ?>">
+            <input type="hidden" name="trainer_id" value="<?php echo htmlspecialchars($training['Trainer_ID']); ?>">
+
+            
+            <h6>חובה למלא את כל השדות</h6>
+            
+            <label for="full_name" class="form-label">שם מלא*</label>
+            <input type="text" class="form-control" id="full_name" name="full_name" required>
+            <div class="error-message" id="name_error"></div>
+            
+            <label for="ID" class="form-label">תעודת זהות*</label>
+            <input dir="ltr" type="text" class="form-control" id="ID" name="ID" minlength="9" maxlength="9" required>
+            <div class="error-message" id="id_error"></div>
+            
+            <label for="credit_card_number" id="label_card" class="form-label">מספר כרטיס* </label>
+            <div class="card-wrapper mb-3"></div>
+            <input type="text" class="form-control" id="credit_card_number" name="credit_card_number" required>
+            <div class="error-message" id="card_error"></div>
+            
+            
+            <label for="expiration_date" class="form-label">תוקף*</label>
+            <div class="d-flex">
+                <input type="text" class="form-control" id="expiration_month" name="expiration_month" placeholder="MM" maxlength="2" required>
+                <input type="text" class="form-control" id="expiration_year" name="expiration_year" placeholder="YY" maxlength="2" required>
+            </div>
+            <div class="error-message" id="expiry_error"></div>
+         
+            <label for="cvv" class="form-label">CVV*</label>
+            <input type="text" class="form-control" id="cvv" name="cvv" required>
+             <div class="error-message" id="cvv_error"></div>
+            
+            <button type="submit" class="btn btn-primary">לתשלום ₪<?php echo htmlspecialchars($training['Cost']); ?>.00
+            </button>
+            <span class="loading"></span>
+            <p id="payment_failure_message"></p>
+            <p id="registration_failure_message"></p>
+        </form>
+        
+    </main>
+    
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/card/2.5.4/card.min.js"></script>
+     <script src="../JS/Training_payment.js"></script>
+    
+    
+</body>
+</html>

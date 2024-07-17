@@ -3,7 +3,7 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     
-   // ob_start();
+  
     session_start();
     // Check if user is logged in as trainee
     if (!isset($_SESSION['user']) || $_SESSION['userType'] !== 'trainee') {
@@ -14,9 +14,7 @@
     $user = $_SESSION['user'];
     $clientNum = $user['clientNum'];
 
-    // Include database connection code
-    // Set header for JSON response
-  //  header('Content-Type: application/json; charset=UTF-8');
+    
     
     // Database connection 
     $host = 'localhost';
@@ -47,7 +45,7 @@
         $update_stmt->bind_param("sssssss", $firstName, $lastName, $gender, $dob, $phone, $email, $clientNum);
 
         if ($update_stmt->execute()) {
-            $message = "פרטים עודכנו בהצלחה.";
+            $message = "פרטים עודכנו בהצלחה!";
         } else {
              $message = "שגיאה בעדכון הפרטים: " . $conn->error;
         }
@@ -60,7 +58,6 @@
     }
 
     // Fetch trainee details based on trainee number
-  //  $trainee_num = $_GET['trainee_num'];
     $sql = "SELECT First_name, Last_name, Phone_num, Email, Birth_date, Gender FROM Trainee WHERE Client_num = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $clientNum);
@@ -71,12 +68,10 @@
     $stmt->close();
     $conn->close();
     // Include the HTML content for the form
-//    ob_end_flush();
+
 
     include 'Personal_details_trainee.html';
     
-    // Redirect to the HTML file
-  //  header('Location: Personal_details_trainee.html');
-  //  exit();
+   
 ?>
 

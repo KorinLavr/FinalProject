@@ -24,25 +24,25 @@
     <div class="form-container">
         <form name="Registration_Form" id="Registration_Form" onsubmit="return validateForm();" action="Registration.php" method="post">
              <input type="hidden" id="userType" name="userType">
-               <!-- Common Fields -->
             <div class="form-row" id="trainer_id">
                 <label for="trainer-ID">תז מאמן</label>
-                <input type="text" id="trainer-ID" name="trainer-ID" placeholder="הזן תז" maxlength="9">
+                <input type="text" id="trainer-ID" name="Trainer_ID" placeholder="הזן תז" maxlength="9">
                 <span class="error-message" id="trainer-ID-error"></span>
             </div>
+              <!-- Common Fields -->
             <div class="form-row">
                 <label for="first-name">שם פרטי</label>
-                <input type="text" id="first-name" name="first-name" placeholder="הזן שם פרטי">
+                <input type="text" id="first-name" name="F_name" placeholder="הזן שם פרטי">
                 <span class="error-message" id="first-name-error"></span>
             </div>
             <div class="form-row">
                 <label for="last-name">שם משפחה</label>
-                <input type="text" id="last-name" name="last-name" placeholder="הזן שם משפחה">
+                <input type="text" id="last-name" name="L_name" placeholder="הזן שם משפחה">
                 <span class="error-message" id="last-name-error"></span>
             </div>
             <div class="form-row">
                 <label for="gender">מגדר</label>
-                <select id="gender" name="gender">
+                <select id="gender" name="Sex">
                     <option value="">בחר</option>
                     <option value="זכר">זכר</option>
                     <option value="נקבה">נקבה</option>
@@ -52,42 +52,59 @@
             </div>
             <div class="form-row">
                 <label for="dob">תאריך לידה</label>
-                <input type="date" id="dob" name="dob">
+                <input type="date" id="dob" name="Bdate">
                 <span class="error-message" id="dob-error"></span>
             </div>
             <div class="form-row">
                 <label for="phone">מספר טלפון</label>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{7}" placeholder="052-0000000">
+                <input type="tel" id="phone" name="Phone_num" pattern="[0-9]{3}-[0-9]{7}" placeholder="052-0000000">
                 <span class="error-message" id="phone-error"></span>
             </div>
-            <div class="form-row">
+            <div  class="form-row">
                 <label for="email">כתובת דוא"ל</label>
-                <input type="email" id="email" name="email" placeholder="user@example.com">
+                <input type="email" id="email" name="Email" placeholder="user@example.com">
                 <span class="error-message" id="email-error"></span>
             </div>
 
              <!-- Coach Specific Fields -->
-            <div id="trainerFields" class="form-section">
+            <div  class="form-section" id="trainerFields">
                 <div class="form-row">
                     <label for="experience">שנות ניסיון</label>
-                    <input type="number" id="experience" name="experience" placeholder="הזן מספר שנות ניסיון">
+                    <input type="number" id="experience" name="Exp_years" placeholder="הזן מספר שנות ניסיון">
                     <span class="error-message" id="experience-error"></span>
                 </div>
                 <div class="form-row">
-                    <label for="training-types">סוגי אימונים</label>
-                    <input type="text" id="training-types" name="training-types" placeholder="הזן סוגי אימונים">
-                    <span class="error-message" id="training-types-error"></span>
+                    <label for="training-type">סוג האימון</label>
+                    <select id="training-type" name="Type">
+                        <option value="">בחר סוג אימון</option>
+                        <option value="אירובי מדרגה">אירובי מדרגה</option>
+                        <option value="בטן, ישבן, ירכים">בטן, ישבן, ירכים</option>
+                        <option value="גמישות ומתיחות">גמישות ומתיחות</option>
+                        <option value="זומבה">זומבה</option>
+                        <option value="יוגה">יוגה</option>
+                        <option value="יוגלאטיס">יוגלאטיס</option>
+                        <option value="עיצוב">עיצוב</option>
+                        <option value="פונקציונאלי">פונקציונאלי</option>
+                        <option value="פילאטיס">פילאטיס</option>
+                        <option value="קיקבוקס">קיקבוקס</option>
+                        <option value="BODY PUMP">BODY PUMP</option>
+                        <option value="BOOTCAMP מתקדמים">BOOTCAMP מתקדמים</option>
+                        <option value="CORE מתיחות">CORE מתיחות</option>
+                        <option value="HIT">HIT</option>
+                        <option value="PUMP מדרגה">PUMP מדרגה</option>
+                        <option value="TRX">TRX</option>
+                    </select>
                 </div>
                 <div class="form-row">
-                    <label for="certification">האם יש לך תעודת מאמן?</label>
-                    <input type="checkbox" id="certification" name="certification" value="yes">
-                    <span class="error-message" id="certification-error"></span>
+                        <label for="certification">האם יש לך תעודת מאמן?</label>
+                        <input type="checkbox" id="certification" name="Certification" value="1">
+                        <span class="error-message" id="certification-error"></span>
                 </div>
             </div>
-
+             
             <div class="form-row">
                 <label for="password">סיסמה</label>
-                <input type="password" id="password" name="password" minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" placeholder="הזן סיסמה">
+                <input type="password" id="password" name="Password" minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" placeholder="הזן סיסמה">
                 <span class="error-message" id="password-error"></span>
             </div>
             <div class="form-row">

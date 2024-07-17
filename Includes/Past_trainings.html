@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>אימוני עבר | Fit Yourself Everywhere</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/Past_trainings.css"> 
+</head>
+<body dir="rtl">
+    <header>
+        <img class="logo_img" src="../Images/לוגו.png" alt="לוגו">
+        <ul class="nav">
+            <li class="nav-item home_pg">
+                <a class="nav-link" href="Trainee_profile.php">הפרופיל שלי</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Logout.php">התנתקות</a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>אימוני עבר</h2>
+        <h3 id="no-trainings-message">לא קיימים אימונים קודמים</h3>
+        <div id="training-container"></div>
+        <button id="show-more-btn" class="btn btn-secondary" onclick="loadMoreTrainings()">הצג עוד</button>
+    </main>
+
+    <!-- Modal Structure -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">פרטים נוספים</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalCost"></p>
+                    <p id="modalDescription"></p>
+                    <p id="modalTrainerName"></p>
+                    <p id="modalTrainerEmail"></p>
+                    <p id="modalTrainingTypeOfTrainer"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close_btn" data-bs-dismiss="modal">סגירה</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        // Calculate initial limit based on screen size
+        function calculateInitialLimit() {
+            if (window.innerWidth < 900) {
+                return 5;
+            }
+            const itemHeight = 180; // Approximate height of each training item
+            const screenHeight = window.innerHeight  - document.querySelector('header').offsetHeight;
+            return Math.floor(screenHeight / itemHeight);
+        }
+
+        let offset = 0;
+        let limit = calculateInitialLimit();
+
+        function showDetails(training) {
+            document.getElementById('modalCost').textContent = 'עלות: ' + '₪' + training.Cost;
+            document.getElementById('modalDescription').textContent = 'תיאור: ' + training.Descript;
+            document.getElementById('modalTrainerName').textContent = 'שם המאמן: ' + training.F_name + ' ' + training.L_name;
+            document.getElementById('modalTrainerEmail').textContent = ' דוא"ל לשאלות: ' + training.Email;
+
+            var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+            modal.show();
+        }
+
+        function loadMoreTrainings() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `Past_trainings.php?ajax=1&offset=${offset}&limit=${limit}`, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const trainings = JSON.parse(xhr.responseText);
+                    const noTrainingsMessage = document.getElementById('no-trainings-message');
+                    const container = document.getElementById('training-container');
+                    if (trainings.length > 0) {
+                        trainings.forEach(training => {
+                            const section = document.createElement('section');
+                            section.classList.add('training-item');
+                            section.innerHTML = `
+                                <p><span class="bold">סוג אימון:</span> ${training.Training_type}</p>
+                                <p><span class="bold">מיקום:</span> ${training.Place}</p>
+                                <p><span class="bold">תאריך:</span> ${training.Training_date}</p>
+                                <p><span class="bold">שעה:</span> ${training.Training_time}</p>
+                                <button class="btn btn-primary" onclick='showDetails(${JSON.stringify(training)})'>פרטים נוספים</button>
+                            `;
+                            container.appendChild(section);
+                        });
+                        offset += trainings.length;
+                    } else {
+                        if (offset === 0) { // No trainings at all
+                            noTrainingsMessage.style.display = 'block';
+                        }
+                        
+                        document.getElementById('show-more-btn').style.display = 'none';
+                    }
+                }
+            };
+            xhr.send();
+        }
+        
+        // Adjust limit when the window is resized
+        window.onresize = function() {
+            limit = calculateInitialLimit();
+        };
+
+
+        // Load initial trainings
+        window.onload = function() {
+                loadMoreTrainings();
+        }
+    </script>
+</body>
+</html>

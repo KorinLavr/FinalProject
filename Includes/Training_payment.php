@@ -30,10 +30,6 @@
         die('Connection failed: ' . $conn->connect_error);
     }
     
-  //  echo $trainingType;
-   // echo $trainDate;
-  //  echo $trainTime;
-  //  echo  $trainerID;
     
     // Fetch the training details from the database using the key components
  
@@ -46,5 +42,4 @@
     
     
     include 'Training_payment.html'; 
-require 'vendor/autoload.php';
 ?>

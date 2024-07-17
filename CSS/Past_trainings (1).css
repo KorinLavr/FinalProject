@@ -1,0 +1,188 @@
+body,
+h2
+{
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 3px;
+}
+
+header {
+    height: 15%;
+    background: linear-gradient(rgba(193, 90, 64, 0.651), rgb(255, 255, 255));
+}
+
+.logo_img
+{
+    height: 55%; 
+    width: 27%;
+    margin-top: 1%;
+    margin-left: 1%;
+    float: left;
+}
+
+.home_pg{
+    width: 430px;
+    margin-top: 0px;
+}
+
+.nav-link{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+.nav{
+    display:block;
+}
+
+main {
+    padding: 20px;
+    min-height: 85vh; /* Ensure it covers at least 85% of the viewport height */
+    height: auto; /* Allow it to expand beyond the viewport */
+    background-image: url(../Images/Past_trainings/pexels-ron-lach-9225393.jpg);
+    background-size:cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    filter:contrast(80%); 
+   
+}
+
+h2, h3{
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+#no-trainings-message{
+    display:none;
+}
+
+
+section{
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 320px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 20px 30px 20px; /* Adjust spacing between cards */
+    vertical-align: top; /* Ensure cards align properly */
+    background: linear-gradient(rgba(255, 247, 243, 0.651), rgba(193, 90, 64, 0.651),rgb(211, 177, 151));
+}
+
+p{
+    margin-bottom:3px;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.btn-primary, .btn-secondary{
+    background-color:rgb(89, 76, 119);
+    border:none;
+    font-weight: bold;
+    float:left;
+    margin-top:-10%;
+    font-size: 15px;
+}
+
+.close_btn{
+    margin-top:0;
+}
+
+#show-more-btn{
+   margin-top:2%;
+   float:none;
+   margin-right:45%;
+}
+
+.modal-title{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+.modal-content{
+    background: linear-gradient(rgb(211, 177, 151), rgba(255, 247, 243, 0.651));
+}
+
+.modal-body p{
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .logo_img {
+       height: auto;
+        width: 60%;
+        margin-top: 1%;
+        margin-left: 0;
+    }
+ 
+     .nav-item {
+        height: 50px;
+        display: inline;
+    }
+
+    .nav-link{
+        display: inline; 
+    }
+  
+    #training-container {
+        text-align: center; /* Ensure container is centered on smaller screens */
+    }
+
+    .btn-primary{
+        float:none;
+        margin-top:0;
+    }
+}
+
+@media (max-width: 500px) {
+    
+    h2,h3{
+        text-align: center;
+    }
+    
+    header {
+       height:auto;
+    }
+    
+    .logo_img {
+        width: 100%;
+        height:80%;
+    }
+    
+    .nav {
+        margin-bottom: 5%;
+        margin-right: 18%;
+    }
+
+    .nav-item {
+        height: 30px;
+    }
+
+    .nav-link {
+        font-size: 1em;
+    }
+    
+    #show-more-btn{
+         margin-right:130px;
+    }
+    
+     #training-container {
+        margin-right:-3%; /* Ensure container is centered on smaller screens */
+    }
+    
+
+}
+

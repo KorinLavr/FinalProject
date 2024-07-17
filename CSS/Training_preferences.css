@@ -37,12 +37,16 @@ header {
     color: rgb(89, 76, 119);
 }
 
+.nav{
+    display:block;
+}
+
 p,h2{
     text-align: center;
 }
 
 main{
-    height: 105%;
+    height: auto;
     background: linear-gradient(rgb(255, 255, 255), rgba(67, 136, 192, 0.651));
 }
 
@@ -114,20 +118,27 @@ form{
     color: rgb(89, 76, 119);
 }
 
-.location_training{
-    display: block;
-    margin-top: 3%;
-}
 
 .location::before {
     content: "\1F4CD"; /* Unicode for Map Pin symbol */
     margin-left: 15px; /* Add some space between the icon and the text */
 }
 
+.location-container, .price-container{
+    display: flex;
+    align-items: center;
+    gap: 0px; /* Adjust the gap as necessary */
+}
+
+.location-container .location_training{
+    margin-top: 3%;
+    margin-bottom: 0%;
+}
+
 .hour::before {
     content: "\1F552"; /* Unicode for Clock Face symbol */
     margin-left: 8px; /* Add some space between the icon and the text */
-    margin-right: -0.5%;
+    margin-right: -0.2%;
 }
 
 .label_start, .label_end{
@@ -143,9 +154,11 @@ form{
 small{
     font-weight: bold;
     color: rgb(207, 72, 72);
+    display: block;
+    margin-right: 3%;
 }
 
-#max_price{
+#max_price, #location_training{
     border-radius: 45px;
     color:white; 
     font-weight:bold;
@@ -194,6 +207,9 @@ small{
     margin-top:2%;
 }
 
+
+
+
 @media (max-width: 1100px) {
     small{
         display: block;
@@ -208,32 +224,20 @@ small{
 
 /* Responsive Design */
 @media (max-width: 900px) {
-    header {
-        height: auto;
-        text-align: center;
-    }
- 
-    .logo_img {
-        height: auto;
-        width: 70%;
+   .logo_img {
+       height: auto;
+        width: 60%;
         margin-top: 1%;
         margin-left: 0;
-        float: none; 
     }
  
-    .nav {
-        display: block;
-        margin-right: 7%;
-    }
- 
-    .nav-item {
-        margin: 0 10px;
-        width: auto;
+     .nav-item {
         height: 50px;
+        display: inline;
     }
- 
+
     .nav-link{
-        margin-right: -7%;
+        display: inline; 
     }
 
     form {
@@ -253,7 +257,7 @@ small{
         width: 100%;
     }
 
-    .type_training, .location_training, .hour_training, .price_training {
+    .type_training, .hour_training {
         display: block;
     }
 
@@ -262,11 +266,15 @@ small{
        display: block;
     }
 
-    #input_start, #input_end{
+    #input_start, #input_end, #location_training{
      
         width:100%;
-       
     }
+
+    .location-container, .price-container {
+        display: block;
+    }
+    
     .price_training, .hour_training{
         margin-top: 5%;
     }
@@ -298,6 +306,32 @@ small{
     form{
         
         background-position: center;
+    }
+
+}
+
+@media (max-width: 500px) {
+    
+    header {
+       height:auto;
+    }
+    
+    .logo_img {
+        width: 100%;
+        height:80%;
+    }
+    
+    .nav {
+        margin-bottom: 5%;
+        margin-right: 18%;
+    }
+
+    .nav-item {
+        height: 30px;
+    }
+
+    .nav-link {
+        font-size: 1em;
     }
 
 }

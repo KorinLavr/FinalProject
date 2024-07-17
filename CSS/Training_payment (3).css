@@ -1,0 +1,243 @@
+body,
+h2
+{
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 2px;
+}
+
+header {
+    height: 15%;
+    background: linear-gradient(rgba(67, 136, 192, 0.651), rgb(255, 255, 255));
+}
+
+.logo_img
+{
+    height: 55%; 
+    width: 27%;
+    margin-top: 1%;
+    margin-left: 1%;
+    float: left;
+}
+
+.home_pg{
+    width: 430px;
+}
+
+.nav-link{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+.nav{
+    display:block;
+}
+
+
+main {
+    padding: 30px;
+    height: auto;
+    background-image: url(../Images/Training_payment/pexels-koolshooters-6246651.jpg);
+    background-size:cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    filter:contrast(70%);  
+}
+
+h2{
+    color:white;
+}
+
+.bold, h6, h2{
+    font-weight:bold;
+}
+
+label{
+    color: rgb(89, 76, 119);
+    font-weight: bold;
+    font-size: large;
+}
+
+input{
+    color:white !important; 
+    font-weight:bold !important;
+    width: 75% !important;
+    background-color:rgb(172, 151, 190) !important;
+}
+
+h2{
+    margin-bottom: 2%;
+}
+
+#credit_card_number{
+    margin-top: -50px;
+}
+
+#label_card{
+    margin-bottom: -10px;
+}
+
+.btn-primary{
+    font-weight:bold !important;
+    background-color:rgb(172, 151, 190) !important;
+    margin-top:3%;
+    border: none;
+}
+
+form, section{
+    display:inline-block;
+    border: 1px solid #ccc;
+    padding: 15px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(rgb(237, 237, 239), rgba(197, 197, 255, 0.651), rgba(148, 148, 173, 0.651));
+    margin: 0 20px 30px 20px;
+    vertical-align: top; 
+}
+
+form{
+    width:35%;
+}
+
+section{
+    width:25%;
+}
+
+#expiration_month, #expiration_year, #cvv{
+    margin-left:3%;
+    width: 20% !important;
+}
+
+.error-message{
+    font-weight:bold;
+    color:red;
+}
+
+.card-wrapper {
+    width: 100%; /* Adjust the width to fit the form */
+    max-width: 400px; /* Max width for the card */
+    margin: 0 auto 0 auto; /* Center align and add some margin below */
+}
+
+#payment_success_title{
+    display:none;
+    font-weight:bold;
+    text-align:center;
+    color:rgb(89, 76, 119);
+}
+
+#payment_success_message{
+    font-weight:bold;
+    text-align:center;
+    color:white;
+    font-size:larger;
+}
+
+#trainee_profile_link{
+    text-align:center;
+    color:white;
+}
+ 
+#payment_failure_message, #registration_failure_message{
+    font-weight:bold;
+    color:red;
+}
+
+.main-success {
+    height: 85%; /* Adjust the height as needed */
+}
+
+.loading{
+            display: none;
+            margin-left: 10px;
+            margin-top:5%;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .logo_img {
+       height: auto;
+        width: 60%;
+        margin-top: 1%;
+        margin-left: 0;
+    }
+ 
+     .nav-item {
+        height: 50px;
+        display: inline;
+    }
+
+    .nav-link{
+        display: inline; 
+    }
+
+    form, section{
+        display:block;
+        width:70%;
+        margin-right:15%;
+    }
+    
+    h2{
+        text-align:center;
+    }
+}
+
+@media (max-width: 500px) {
+    input{
+        width:100% !important;
+    }
+    
+    #expiration_month, #expiration_year, #cvv{
+        width: 30% !important;
+    }
+    
+    form, section{
+        width:100%;
+        margin-right:0%;
+    }
+    
+    header {
+       height:auto;
+    }
+    
+    .logo_img {
+        width: 100%;
+        height:80%;
+    }
+    
+    .nav {
+        margin-bottom: 5%;
+        margin-right: 18%;
+    }
+
+    .nav-item {
+        height: 30px;
+    }
+
+    .nav-link {
+        font-size: 1em;
+    }
+
+}
+
+
+

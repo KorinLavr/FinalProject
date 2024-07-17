@@ -6,7 +6,6 @@ if (!isset($_SESSION['user']) || $_SESSION['userType'] !== 'trainer') {
 }
 
 $user = $_SESSION['user'];
-
 $host = 'localhost';
 $user_db = 'iskorinla2_NKM';
 $pass = 'korinla2_SADNA';

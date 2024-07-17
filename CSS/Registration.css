@@ -211,7 +211,37 @@ input.error {
     margin-top: 5px;
     display: block;
 }
+select#training-type {
+    padding: 10px;
+    border: 2px solid #6a0dad;
+    border-radius: 20px;
+    font-size: 16px;
+    width: 200px; /* Adjust width as needed */
+    margin-left: 10px;
+    background-color: #f2e6ff; /* Light purple background */
+    color: #6a0dad; /* Purple text color */
+}
+
+/* Style hover and focus effects */
+select#training-type:hover,
+select#training-type:focus {
+    background-color: #e0ccff; /* Darker purple on hover/focus */
+    outline: none; /* Remove default focus outline */
+}
+
+/* Style option elements */
+select#training-type option {
+    background-color: #f2e6ff; /* Light purple background */
+    color: #6a0dad; /* Purple text color */
+}
+
+/* Style selected option */
+select#training-type option:checked {
+    background-color: #6a0dad; /* Purple background for selected option */
+    color: white; /* White text color for selected option */
+}
 
 input.error, select.error {
     border-color: red;
 }
+

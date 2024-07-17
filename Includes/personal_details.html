@@ -21,22 +21,72 @@
 
     <main>
         <div class="personal-details">
-            <h2>שלום <?php echo htmlspecialchars($user['firstName'] . ' ' . $user['lastName']); ?>!</h2>
-            <ul>
-                <li><span>שם פרטי:</span> <?php echo htmlspecialchars($trainer['F_name']); ?></li>
-                <li><span>שם משפחה:</span> <?php echo htmlspecialchars($trainer['L_name']); ?></li>
-                <li><span>תעודת זהות:</span> <?php echo htmlspecialchars($trainer['Trainer_ID']); ?></li>
-                <li><span>מגדר:</span> <?php echo htmlspecialchars($trainer['Sex']); ?></li>
-                <li><span>תאריך לידה:</span> <?php echo htmlspecialchars($trainer['Bdate']); ?></li>
-                <li><span>מספר טלפון:</span> <?php echo htmlspecialchars($trainer['Phone_num']); ?></li>
-                <li><span>כתובת דוא"ל:</span> <?php echo htmlspecialchars($trainer['Email']); ?></li>
-                <li><span>שנות ניסיון:</span> <?php echo htmlspecialchars($trainer['Exp_years']); ?></li>
-                <li><span>סוגי אימונים:</span> <?php echo htmlspecialchars($trainer['Type']); ?></li>
-                <li><span>תעודת מאמן:</span> <?php echo $trainer['Certification'] ? 'כן' : 'לא'; ?></li>
-            </ul>
+            <h2 class="page-title">שלום <?php echo htmlspecialchars($user['firstName'] . ' ' . $user['lastName']); ?>!</h2>
+            <form id="personal-details-form" method="POST" action="save_user_data.php">
+                <ul>
+                    <li><span>שם פרטי:</span> <input type="text" name="F_name" value="<?php echo htmlspecialchars($trainer['F_name']); ?>" id="first-name" readonly></li>
+                    <li><span>שם משפחה:</span> <input type="text" name="L_name" value="<?php echo htmlspecialchars($trainer['L_name']); ?>" id="last-name" readonly></li>
+                    <li><span>תעודת זהות:</span> <input type="text" name="Trainer_ID" value="<?php echo htmlspecialchars($trainer['Trainer_ID']); ?>" readonly></li>
+                    <li><span>מגדר:</span> <input type="text" name="Sex" value="<?php echo htmlspecialchars($trainer['Sex']); ?>" id="gender" readonly></li>
+                    <li><span>תאריך לידה:</span> <input type="text" name="Bdate" value="<?php echo htmlspecialchars($trainer['Bdate']); ?>" id="birth-date" readonly></li>
+                    <li><span>מספר טלפון:</span> <input type="text" name="Phone_num" value="<?php echo htmlspecialchars($trainer['Phone_num']); ?>" id="phone-number" readonly></li>
+                    <li><span>כתובת דוא"ל:</span> <input type="text" name="Email" value="<?php echo htmlspecialchars($trainer['Email']); ?>" id="email" readonly></li>
+                    <li><span>שנות ניסיון:</span> <input type="text" name="Exp_years" value="<?php echo htmlspecialchars($trainer['Exp_years']); ?>" id="experience" readonly></li>
+                    <li><span>סוגי אימונים:</span> <input type="text" name="Type" value="<?php echo htmlspecialchars($trainer['Type']); ?>" id="training-types" readonly></li>
+                    <li><span>תעודת מאמן:</span> <input type="checkbox" name="Certification" value="1" <?php echo $trainer['Certification'] ? 'checked' : ''; ?> disabled></li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" id="edit-button" class="edit-button">
+                        עריכה
+                    </button>
+                    <button type="submit" id="save-button" class="save-button" style="display: none;">
+                        שמירה
+                    </button>
+                </div>
+            </form>
         </div>
+
+        <div id="user-details"></div>
     </main>
 
-    <script src="../JS/fetch_user_data.js"></script>
+    <script>
+        document.getElementById('edit-button').addEventListener('click', function() {
+            // Enable input fields for editing
+            var inputs = document.querySelectorAll('#personal-details-form input');
+            inputs.forEach(function(input) {
+                if (input.name !== 'Trainer_ID') {
+                    input.removeAttribute('readonly');
+                }
+            });
+
+            // Enable the checkbox
+            document.querySelector('#personal-details-form input[type="checkbox"]').removeAttribute('disabled');
+
+            document.getElementById('edit-button').style.display = 'none';
+            document.getElementById('save-button').style.display = 'inline';
+        });
+
+        document.getElementById('personal-details-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // AJAX request to save data without reloading
+            var formData = new FormData(this);
+            fetch('save_user_data.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('הנתונים נשמרו בהצלחה!');
+                    // Optionally reload the page or update the UI
+                } else {
+                    alert('שגיאה בשמירת הנתונים: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
 </html>

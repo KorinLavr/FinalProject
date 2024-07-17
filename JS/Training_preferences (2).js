@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var clientNum = document.querySelector("input[name='client_num']").value;
     var formFields = document.querySelectorAll("#preferencesForm input, #preferencesForm button, #preferencesForm select, #preferencesForm textarea");
-
+    
  // Fetch training preferences using fetch API
     fetch("Training_preferences.php", {
         method: "POST",
@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("input[name='start_hour']").value = data.Start_hour;
             document.querySelector("input[name='end_hour']").value = data.End_hour;
             document.querySelector("input[name='max_price']").value = data.Max_price;
+            document.querySelector("input[name='location_training']").value = data.Training_location;
+
 
             // Update the dropdown button text with the selected training type
             dropdownButton.innerText = data.Training_type;
@@ -92,14 +94,6 @@ $(function() {
 });
 
 
-// Function to disable form fields
-//function disableFormFields() {
-//    formFields.forEach(field => {
-//        field.disabled = true;
- //   });
-//}
-
-
 document.getElementById("editPreferencesButton").addEventListener("click", function (e) {
         e.preventDefault();
         var formFields = document.querySelectorAll("#preferencesForm input, #preferencesForm button, #preferencesForm select, #preferencesForm textarea");
@@ -119,14 +113,20 @@ function validateForm() {
         return false;
     }
     
+    const location = document.getElementById('location_training').value;
+    if (!location) {
+        alert('יש להזין מיקום אימון מועדף');
+        return false;
+    }
+    
     var startTime = document.querySelector("input[name='start_hour']").value;
     var endTime = document.querySelector("input[name='end_hour']").value;
     var maxPrice = document.querySelector("input[name='max_price']").value;
 
     // Default values
     var defaultStartTime = "06:00";
-    var defaultEndTime = "00:00";
-    var defaultMaxPrice =  "₪200";
+    var defaultEndTime = "23:00";
+    var defaultMaxPrice =  "200";
 
     var warningMessage = document.getElementById('warningMessage');
     if (startTime === defaultStartTime && endTime === defaultEndTime && 
@@ -146,6 +146,12 @@ function handleSubmit() {
         return false; // Prevent form submission if validation fails
     }
     
+    var location = document.getElementById('location_training').value;
+    if (!location || !document.getElementById('latitude').value || !document.getElementById('longitude').value) {
+        alert('יש להזין מיקום מדויק מהרשימה .');
+        return false;
+    }
+    
     var formData = new FormData(document.getElementById('preferencesForm'));
  
     var xhr = new XMLHttpRequest();
@@ -158,6 +164,7 @@ function handleSubmit() {
             // Check if the registration was successful
             if (response.success) {
                 alert("הנתונים נשמרו בהצלחה");
+                window.location.href = 'https://iskorinla2.mtacloud.co.il/Includes/Trainee_profile.php';
                 // Disable form fields
                 var formFields = document.querySelectorAll("#preferencesForm input, #preferencesForm button, #preferencesForm select, #preferencesForm textarea");
                 formFields.forEach(field => {
@@ -173,16 +180,11 @@ function handleSubmit() {
             }
         }
     }
-  //  disableFormFields();
     
     xhr.send(formData);
     return false; // Prevent form from submitting the default way
 }
 
 
-
-
-
-//אם יהיה זמן להוסיף ימי אימון ומדריך מועדף
 
 

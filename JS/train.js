@@ -11,33 +11,46 @@ function validateAndSubmit() {
         }
     });
 
+    // Validate date
     const trainingDateInput = document.getElementById('training-date');
-    const trainingTimeInput = document.getElementById('training-time');
     const selectedDate = new Date(trainingDateInput.value);
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Remove time part for today's date comparison
 
-    // Check if the selected date is in the past
-    if (selectedDate < today) {
+    if (selectedDate <= today) {
         trainingDateInput.classList.add('error');
-        alert('לא ניתן לבחור תאריך אימון שכבר עבר. בחר תאריך עתידי או את התאריך של היום.');
+        alert('לא ניתן לבחור תאריך אימון שהוא היום או תאריך שעבר. בחר תאריך עתידי.');
         isValid = false;
     } else {
         trainingDateInput.classList.remove('error');
     }
 
-    // Check if the selected time on today's date is in the past
-    if (selectedDate.getTime() === today.getTime()) {
-        const selectedTime = trainingTimeInput.value;
-        const currentTime = new Date().toTimeString().split(' ')[0];
+    // Validate training price
+    const trainingPriceInput = document.getElementById('training-price');
+    const trainingPrice = parseFloat(trainingPriceInput.value);
 
-        if (selectedTime < currentTime) {
-            trainingTimeInput.classList.add('error');
-            alert('לא ניתן לבחור שעת אימון שכבר עברה. בחר שעה עתידית.');
-            isValid = false;
-        } else {
-            trainingTimeInput.classList.remove('error');
-        }
+    if (trainingPrice < 50 || trainingPrice > 200) {
+        trainingPriceInput.classList.add('error');
+        alert('מחיר לא תקין. המחיר נע בין 50 ש"ח ל-200 ש"ח.');
+        isValid = false;
+    } else {
+        trainingPriceInput.classList.remove('error');
+    }
+
+    // Validate training max participants
+    const trainingMaxInput = document.getElementById('training-max');
+    const trainingMax = parseInt(trainingMaxInput.value);
+
+    if (trainingMax <= 0) {
+        trainingMaxInput.classList.add('error');
+        alert('מספר משתתפים לא תקין.');
+        isValid = false;
+    } else if (trainingMax > 50) {
+        trainingMaxInput.classList.add('error');
+        alert('מספר המשתתפים שגוי. המספר המרבי של משתתפים באימון יכול להיות 50 אנשים.');
+        isValid = false;
+    } else {
+        trainingMaxInput.classList.remove('error');
     }
 
     if (!isValid) {
@@ -79,6 +92,9 @@ function getQueryParams() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    initAutocomplete(); // Initialize autocomplete
     const params = getQueryParams();
     if (params.trainerID) {
-        document.getElementById('trainer
+        document.getElementById('trainer-ID').value = params.trainerID;
+    }
+});

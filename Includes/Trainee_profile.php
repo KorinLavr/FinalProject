@@ -33,7 +33,7 @@
         return $row['count'] > 0;
     }
     
-    $preferencesFilled = arePreferencesFilled($conn, $clientNum); // Replace with actual user ID
+    $preferencesFilled = arePreferencesFilled($conn, $clientNum); 
     $conn->close();
     
     if (isset($_GET['check_preferences'])) {

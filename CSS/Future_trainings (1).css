@@ -1,0 +1,174 @@
+body,
+h2
+{
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 3px;
+}
+
+header {
+    height: 15%;
+    background: linear-gradient(rgba(175, 194, 227, 0.651), rgb(255, 255, 255));
+}
+
+.logo_img
+{
+    height: 55%; 
+    width: 27%;
+    margin-top: 1%;
+    margin-left: 1%;
+    float: left;
+}
+
+.home_pg{
+    width: 430px;
+    margin-top: 0px;
+}
+
+.nav-link{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+.nav{
+    display:block;
+}
+
+main {
+    padding: 20px;
+    min-height: 85vh; /* Ensure it covers at least 85% of the viewport height */
+    height: auto; /* Allow it to expand beyond the viewport */
+    background-image: url(../Images/Future_trainings/pexels-tima-miroshnichenko-6388378.jpg);
+    background-size:cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    filter:contrast(70%); 
+   
+}
+
+h2, h3{
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: rgb(89, 76, 119);;
+}
+
+
+section{
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 320px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 20px 30px 20px; /* Adjust spacing between cards */
+    vertical-align: top; /* Ensure cards align properly */
+    background: linear-gradient(rgb(255, 255, 255), rgba(175, 194, 227, 0.651), rgb(117, 106, 106));
+    opacity: 0; 
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+p{
+    margin-bottom:3px;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.btn-primary, .btn-secondary{
+    background-color:rgb(89, 76, 119);
+    border:none;
+    font-weight: bold;
+    float:left;
+    margin-top:-10%;
+    font-size: 15px;
+}
+
+.close_btn{
+    margin-top:0;
+}
+
+.modal-title{
+    font-weight: bold;
+    color: rgb(89, 76, 119);
+}
+
+.modal-content{
+    background: linear-gradient(rgb(117, 106, 106), rgba(175, 194, 227, 0.651), rgb(255, 255, 255));
+}
+
+.modal-body p{
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .logo_img {
+       height: auto;
+        width: 60%;
+        margin-top: 1%;
+        margin-left: 0;
+    }
+ 
+     .nav-item {
+        height: 50px;
+        display: inline;
+    }
+
+    .nav-link{
+        display: inline; 
+    }
+    
+    main{
+        height:auto;
+    }
+}
+
+@media (max-width: 500px) {
+    
+    h2,h3{
+        text-align: center;
+        color:white;
+    }
+    
+    header {
+       height:auto;
+    }
+    
+    .logo_img {
+        width: 100%;
+        height:80%;
+    }
+    
+    .nav {
+        margin-bottom: 5%;
+        margin-right: 18%;
+    }
+
+    .nav-item {
+        height: 30px;
+    }
+
+    .nav-link {
+        font-size: 1em;
+    }
+    
+    section{
+       margin-right:20px;
+    }
+}
+

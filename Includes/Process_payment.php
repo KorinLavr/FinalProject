@@ -18,13 +18,11 @@
     $expiration_year = $_POST['expiration_year'];
     $cvv = $_POST['cvv'];
     
-    // Here you would typically process the payment using a payment gateway API.
-    // For demonstration purposes, we will just simulate a successful payment.
     
     // Simulate payment processing delay
     sleep(2);
     
-    // Assume payment is successful
+    // payment is successful
     $payment_successful = true;
     
     if ($payment_successful) {

@@ -11,18 +11,19 @@
     <header>
         <img class = "logo_img" src="../Images/לוגו.png" alt="לוגו">
         <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="Logout.php">התנתקות</a>
-            </li>
             <li class="nav-item home_pg">
                 <a class="nav-link" href="Trainee_profile.php">הפרופיל שלי</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Logout.php">התנתקות</a>
             </li>
         </ul>
     </header>
 
     <main>
         <h2>אימונים מומלצים עבורך</h2>
-        <p class="remark">במידה ולא נמצאו אימונים התואמים את העדפותיך המערכת תציג אימונים אחרים היכולים להתאים לך</p>
+        <p class="remark" id = "remark">במידה ולא נמצאו אימונים התואמים את העדפותיך המערכת תציג אימונים אחרים היכולים להתאים לך</p>
+        <div id="message" class="message"></div>
             <?php foreach ($trainings_to_show as $training): ?>
                 <?php
                     $key_of_training_to_show = $training['Type'] . '|' . $training['Train_date'] . '|' . $training['Time'] . '|' . $training['Trainer_ID'];
@@ -72,6 +73,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
     <script>
+    
+         // Function to display the message
+        function displayMessage(message) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            document.getElementById('remark').style.display = 'none';
+        //    document.querySelector('main').classList.add('main-message');
+        }
+        
         function showDetails(training) {
             document.getElementById('modalMaxParticipants').textContent = 'מספר משתתפים מרבי: ' + training.Max_training;
             document.getElementById('modalDescription').textContent = 'תיאור: ' + training.Descript;
@@ -82,6 +93,24 @@
             var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
             modal.show();
         }
+        
+        // Function to sequentially show training cards
+        function showTrainingCardsSequentially() {
+            const cards = document.querySelectorAll('.training-card');
+            let delay = 0;
+    
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.animation = 'fadeIn 0.5s ease-out';
+                }, delay);
+                delay += 200; // Adjust the delay between each card (in milliseconds)
+            });
+        }
+    
+        // Call the function when the page is loaded
+        document.addEventListener('DOMContentLoaded', showTrainingCardsSequentially);
+        
     </script>
 </body>
 </html>
